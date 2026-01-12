@@ -1,0 +1,62 @@
+.card {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 10px 12px;
+  display: flex;
+  align-items: stretch; 
+  justify-content: space-between;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+}
+
+.card-left {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  flex: 1;
+}
+
+.card-line {
+  width: 4px;
+  height: 32px;
+  background: #e5e7eb;
+  border-radius: 4px;
+}
+
+.card-title {
+  margin: 0;
+  font-size: 14px;
+  color: #111827;
+  line-height: 1.4;
+}
+
+.card-actions {
+  display: flex;
+  gap: 6px;
+  margin-left: 8px;
+}
+
+.card-actions button {
+  border: none;
+  background: #f3f4f6;
+  padding: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.card-actions img {
+  width: 16px;
+  height: 16px;
+}
+
+
+.column-todo .card-line {
+  background: #0ea5e9;
+}
+
+.column-inprogress .card-line {
+  background: #f97316;
+}
+
+.column-done .card-line {
+  background: #22c55e;
+}
