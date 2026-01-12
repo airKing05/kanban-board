@@ -92,3 +92,53 @@
   opacity: 0.6;
   cursor: not-allowed;
 }
+
+
+
+/* Delete modal inherits main modal styles */
+.modal-body p {
+  font-size: 15px;
+  color: #111827; /* same as Add/Edit modal text */
+  margin: 0;
+}
+
+/* Button container inside modal */
+.modal-body .delete-actions {
+  display: flex;
+  gap: 10px;        /* spacing between buttons */
+  margin-top: 16px; /* same as Add/Edit modal spacing */
+}
+
+/* Primary delete button */
+.modal-body .delete-actions .btn-delete {
+  flex: 1; /* stretch to fill */
+  background: #ef4444; /* red for delete */
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modal-body .delete-actions .btn-delete:hover {
+  background: #dc2626; /* darker red on hover */
+}
+
+/* Secondary cancel button */
+.modal-body .delete-actions .btn-cancel {
+  flex: 1;
+  background: #e5e7eb; /* light gray */
+  color: #111827;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.modal-body .delete-actions .btn-cancel:hover {
+  background: #d1d5db; /* slightly darker gray on hover */
+}

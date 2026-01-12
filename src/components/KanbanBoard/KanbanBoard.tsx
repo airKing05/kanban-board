@@ -32,7 +32,7 @@ export const KanbanBoard = () => {
         },
         },
     }));
-    };
+  };
 
    const handleEditTask = (cardId: string, newTitle: string) => {
     const trimmedTitle = newTitle.trim();
@@ -48,7 +48,35 @@ export const KanbanBoard = () => {
         },
         },
     }));
+   };
+
+    const handleDeleteTask = (cardId: string) => {
+      setState((prev) => {
+        // Find which column contains this card
+        const columnId = Object.keys(prev.columns).find((colId) =>
+          prev.columns[colId].cardIds.includes(cardId)
+        );
+
+        if (!columnId) return prev;
+
+        const { [cardId]: _, ...remainingCards } = prev.cards;
+
+        return {
+          ...prev,
+          cards: remainingCards,
+          columns: {
+            ...prev.columns,
+            [columnId]: {
+              ...prev.columns[columnId],
+              cardIds: prev.columns[columnId].cardIds.filter(
+                (id) => id !== cardId
+              ),
+            },
+          },
+        };
+      });
     };
+
 
 
 
@@ -67,6 +95,7 @@ export const KanbanBoard = () => {
             cards={cards}
             onAddTask={handleAddTask}
             onEditTask={handleEditTask}
+            onDeleteTask={handleDeleteTask}
         />
 
         );

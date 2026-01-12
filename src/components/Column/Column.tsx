@@ -9,6 +9,7 @@ interface ColumnProps {
   cards: KanbanCard[];
   onAddTask: (columnId: string, title: string) => void;
   onEditTask: (cardId: string, title: string) => void;
+  onDeleteTask: (cardId: string) => void;
 }
 
 export const Column = ({
@@ -16,6 +17,7 @@ export const Column = ({
   cards,
   onAddTask,
   onEditTask,
+  onDeleteTask,
 }: ColumnProps) => {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [title, setTitle] = useState("");
@@ -45,6 +47,7 @@ export const Column = ({
             key={card.id}
             card={card}
             onEditTask={onEditTask}
+            onDeleteTask={onDeleteTask}
           />
         ))}
       </div>
