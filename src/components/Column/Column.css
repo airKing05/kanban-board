@@ -8,10 +8,8 @@
   flex-direction: column;
   gap: 8px;
   height: 600px;
-  border: 1px solid red;
 }
 
-/* Header */
 .column-header {
   display: flex;
   align-items: center;

@@ -3,10 +3,15 @@ import { Card } from "../Card/Card";
 import { Modal } from "../Modal/Modal";
 import "./Column.css";
 import type { KanbanCard, KanbanColumn } from "../../types/kanban";
+import {
+  SortableContext,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
+import { useDroppable } from "@dnd-kit/core";
 
 interface ColumnProps {
   column: KanbanColumn;
-  cards: KanbanCard[];
+  cards: Record<string, KanbanCard>;
   onAddTask: (columnId: string, title: string) => void;
   onEditTask: (cardId: string, title: string) => void;
   onDeleteTask: (cardId: string) => void;
@@ -21,6 +26,10 @@ export const Column = ({
 }: ColumnProps) => {
   const [isAddOpen, setIsAddOpen] = useState(false);
   const [title, setTitle] = useState("");
+  const { setNodeRef } = useDroppable({
+  id: column.id,
+});
+
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,26 +40,36 @@ export const Column = ({
     setIsAddOpen(false);
   };
 
-  const columnClass = `column column-${column.id}`;
-
   return (
-    <div className={columnClass}>
+    <div className={`column column-${column.id}`}>
       <div className="column-header">
         <h4>{column.title}</h4>
-        <span>{cards.length}</span>
+        <span>{column.cardIds.length}</span>
         <button onClick={() => setIsAddOpen(true)}>+</button>
       </div>
 
-      <div className="column-list">
-        {cards.map((card) => (
-          <Card
-            key={card.id}
-            card={card}
-            onEditTask={onEditTask}
-            onDeleteTask={onDeleteTask}
-          />
-        ))}
-      </div>
+      <SortableContext
+        items={column.cardIds}
+        strategy={verticalListSortingStrategy}
+      >
+        <div className="column-list" 
+        ref={setNodeRef} 
+        >
+          {column.cardIds.map((cardId) => {
+            const card = cards[cardId];
+
+            return (
+              <Card
+                key={card.id}
+                card={card}
+                onEditTask={onEditTask}
+                onDeleteTask={onDeleteTask}
+                columnId={column.id}
+              />
+            );
+          })}
+        </div>
+      </SortableContext>
 
       {isAddOpen && (
         <Modal title="Add Task" onClose={() => setIsAddOpen(false)}>

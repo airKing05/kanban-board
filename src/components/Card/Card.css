@@ -62,3 +62,19 @@
 }
 
 
+.card.dragging {
+  opacity: 0.6;
+  cursor: grabbing;
+}
+
+.card {
+  will-change: transform;
+}
+
+.card-overlay {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 10px 12px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
